@@ -9,14 +9,14 @@
 )
 
 if ($PSVersionTable.PSVersion.Major -lt 3) {
-$lookup = (Get-ChildItem $DLLPath -Filter $Filter -Recurse | select -ExpandProperty versioninfo)
+$lookup = (Get-ChildItem $DLLPath -Filter $Filter -Recurse | Select-Object -ExpandProperty versioninfo)
 }
 else {
 $lookup = ((Get-ChildItem $DLLPath -Filter $Filter -Recurse).versioninfo)
 }
 
 foreach ($file in $lookup) {
-$version = $file | select -ExpandProperty productversion
-$fullname = $file | select -ExpandProperty filename
+$version = $file | Select-Object -ExpandProperty productversion
+$fullname = $file | Select-Object -ExpandProperty filename
 Write-Host "$fullname $version" 
 }
